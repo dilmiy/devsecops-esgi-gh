@@ -1,14 +1,13 @@
-name: la con de ses morts
-on: [push]
-jobs:
-  jenkins-container-pipeline:
+ jobs:
+  job-name:
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/jenkinsci/jenkinsfile-runner:master
     steps:
-      - uses:
-          jenkinsci/jfr-container-action@master
+      - uses: actions/checkout@v2
+      - uese: jenkinsci/jfr-setup-action@master
+      - uses: jenkinsci/jfr-plugin-installation-action@master
+        with:
+          pluginstxt: plugins.txt
+      - uses: jenkinsci/jfr-runtime-action@master
         with:
           command: run
           jenkinsfile: Jenkinsfile
-          pluginstxt: plugins.txt
